@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const roles = ["Frontend Engineer", "DevOps Engineer", "React Developer", "Mobile Developer"];
 
@@ -64,7 +64,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
           const animate = (now: number) => {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
+            const eased = 1 - (1 - progress) ** 3;
             setCount(Math.floor(eased * target));
             if (progress < 1) requestAnimationFrame(animate);
           };
@@ -189,6 +189,7 @@ export default function Hero() {
                 >
                   Let&apos;s Talk
                   <svg className="size-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <title>Email icon</title>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                   </svg>
                 </motion.a>
@@ -200,6 +201,7 @@ export default function Hero() {
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-border hover:border-accent/50 text-sm font-medium transition-colors"
                 >
                   <svg className="size-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <title>Download icon</title>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                   </svg>
                   Download Resume
@@ -264,6 +266,7 @@ export default function Hero() {
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
           <svg className="size-5 text-muted" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <title>Scroll down</title>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
           </svg>
         </motion.div>

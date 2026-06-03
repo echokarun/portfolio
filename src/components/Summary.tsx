@@ -34,7 +34,7 @@ export default function Summary() {
               "I&apos;m comfortable working across the full delivery lifecycle — from pixel-perfect UI development to cloud deployment — and actively expanding into full stack engineering. Currently learning Express.js and backend architecture.",
               "Known for writing clean, well-structured code with proper file/folder conventions, and for applying security awareness in production environments.",
             ].map((text, i) => (
-              <motion.p key={i} custom={i} variants={stagger}>
+              <motion.p key={text} custom={i} variants={stagger}>
                 {text}
               </motion.p>
             ))}

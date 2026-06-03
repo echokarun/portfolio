@@ -50,7 +50,7 @@ export default function Experience() {
           <ul className="space-y-3">
             {highlights.map((item, i) => (
               <motion.li
-                key={i}
+                key={item}
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
