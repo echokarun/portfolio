@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const roles = ["Frontend Engineer", "DevOps Engineer", "React Developer", "Mobile Developer"];
@@ -229,30 +228,86 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Profile picture */}
+            {/* Terminal code card */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="shrink-0 lg:order-last"
+              className="shrink-0 lg:order-last w-full max-w-md lg:max-w-lg"
             >
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-accent/20 blur-3xl" />
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative size-48 sm:size-56 lg:size-72 rounded-full overflow-hidden border-2 border-border ring-4 ring-accent/10"
-                >
-                    <Image
-                      src="/pp.jpg"
-                      alt="Karun Rayamajhi"
-                      fill
-                      className="object-cover"
-                      priority
-                      unoptimized
-                    />
-                </motion.div>
-              </div>
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-accent/10 blur-3xl rounded-3xl" />
+                <div className="relative bg-[#0a0a0f] border border-border rounded-2xl overflow-hidden shadow-2xl shadow-accent/5">
+                  {/* Terminal header */}
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-[#0d0d12]">
+                    <div className="flex gap-1.5">
+                      <span className="size-3 rounded-full bg-red-500/80" />
+                      <span className="size-3 rounded-full bg-yellow-500/80" />
+                      <span className="size-3 rounded-full bg-green-500/80" />
+                    </div>
+                    <span className="text-xs text-muted ml-2 font-mono">karun@portfolio ~</span>
+                  </div>
+                  {/* Terminal body */}
+                  <div className="p-5 font-mono text-sm leading-relaxed space-y-2">
+                    <div className="flex gap-2">
+                      <span className="text-green-400">❯</span>
+                      <span className="text-muted">cat skills.json</span>
+                    </div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.2, duration: 0.5 }}
+                      className="pl-6"
+                    >
+                      <span className="text-accent">{'{'}</span>
+                    </motion.div>
+                    {[
+                      ['"frontend"', '"React · Next.js · TypeScript"'],
+                      ['"mobile"', '"React Native · Expo"'],
+                      ['"devops"', '"Docker · Nginx · CI/CD"'],
+                      ['"backend"', '"PostgreSQL · NestJS"'],
+                    ].map(([key, val], i) => (
+                      <motion.div
+                        key={key}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.4 + i * 0.15, duration: 0.4 }}
+                        className="pl-6 flex gap-1 flex-wrap"
+                      >
+                        <span className="text-blue-300">{key}</span>
+                        <span className="text-muted">:</span>
+                        <span className="text-orange-300">{val}</span>
+                        <span className="text-muted">,</span>
+                      </motion.div>
+                    ))}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 2.2, duration: 0.4 }}
+                      className="pl-6"
+                    >
+                      <span className="text-accent">{'}'}</span>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 2.5, duration: 0.4 }}
+                      className="flex gap-2 pt-1"
+                    >
+                      <span className="text-green-400">❯</span>
+                      <motion.span
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                        className="inline-block w-2.5 h-5 bg-accent"
+                      />
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
