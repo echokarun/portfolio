@@ -30,8 +30,8 @@ export default function Summary() {
             className="space-y-5 text-base md:text-lg leading-relaxed text-muted"
           >
             {[
-              "Hi, I&apos;m Karun. A Frontend Developer with hands-on experience building and deploying production-grade web and mobile applications. Proficient in React, TypeScript, Next.js, and React Native, with practical DevOps experience spanning Docker, Nginx, CI/CD pipelines, and self-hosted VPS infrastructure.",
-              "I&apos;m comfortable working across the full delivery lifecycle — from pixel-perfect UI development to cloud deployment — and actively expanding into full stack engineering. Currently learning Express.js and backend architecture.",
+              "Hi, I'm Karun. A Frontend Developer with hands-on experience building and deploying production-grade web and mobile applications. Proficient in React, TypeScript, Next.js, and React Native, with practical DevOps experience spanning Docker, Nginx, CI/CD pipelines, and self-hosted VPS infrastructure.",
+              "I'm comfortable working across the full delivery lifecycle — from pixel-perfect UI development to cloud deployment — and actively expanding into full stack engineering. Currently learning Express.js and backend architecture.",
               "Known for writing clean, well-structured code with proper file/folder conventions, and for applying security awareness in production environments.",
             ].map((text, i) => (
               <motion.p key={text} custom={i} variants={stagger}>

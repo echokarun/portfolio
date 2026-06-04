@@ -147,7 +147,7 @@ export default function Hero() {
               >
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] mb-6">
                   <span className="block text-muted text-lg sm:text-xl font-normal tracking-normal mb-2">
-                    Hi, I&apos;m
+                    Hi, I'm
                   </span>
                   Karun
                   <br />
@@ -186,7 +186,7 @@ export default function Hero() {
                   href="mailto:rayamajhikarun@gmail.com"
                   className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent text-white font-medium text-sm hover:bg-accent/90 transition-colors"
                 >
-                  Let&apos;s Talk
+                  Let's Talk
                   <svg className="size-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <title>Email icon</title>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />

@@ -18,7 +18,7 @@ export default function Footer() {
           </h2>
           <p className="text-muted max-w-lg mb-10 text-sm md:text-base leading-relaxed">
             Currently available for freelance and full-time opportunities.
-            Feel free to reach out if you&apos;d like to work together.
+            Feel free to reach out if you'd like to work together.
           </p>
 
           <motion.a
