@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import Image from "next/image";
+
 import { useEffect, useRef, useState } from "react";
 
 const roles = ["Frontend Engineer", "DevOps Engineer", "React Developer", "Mobile Developer"];
@@ -243,12 +243,10 @@ export default function Hero() {
                   transition={{ duration: 0.3 }}
                   className="relative size-48 sm:size-56 lg:size-72 rounded-full overflow-hidden border-2 border-border ring-4 ring-accent/10"
                 >
-                    <Image
+                    <img
                       src="/pp.jpg"
                       alt="Karun Rayamajhi"
-                      fill
-                      className="object-cover"
-                      priority
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                 </motion.div>
               </div>
