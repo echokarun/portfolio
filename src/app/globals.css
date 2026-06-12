@@ -10,6 +10,38 @@
   --card-hover: #111111;
   --border: #1a1a1a;
   --border-light: #252525;
+  --surface: #27272a;
+  --surface-secondary: #18181b;
+  --surface-text: #a1a1aa;
+  --terminal-bg: #0a0a0f;
+  --terminal-header: #0d0d12;
+  --selection-bg: rgba(108, 92, 231, 0.3);
+  --selection-text: #ffffff;
+  --accent-text: #ffffff;
+  --terminal-key: #93c5fd;
+  --terminal-value: #fdba74;
+}
+
+.light {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --muted: #71717a;
+  --accent: #6c5ce7;
+  --accent-glow: rgba(108, 92, 231, 0.15);
+  --card: #ffffff;
+  --card-hover: #f4f4f5;
+  --border: #e4e4e7;
+  --border-light: #d4d4d8;
+  --surface: #f4f4f5;
+  --surface-secondary: #e4e4e7;
+  --surface-text: #52525b;
+  --terminal-bg: #f8f8fc;
+  --terminal-header: #eeeef4;
+  --selection-bg: rgba(108, 92, 231, 0.2);
+  --selection-text: #18181b;
+  --accent-text: #ffffff;
+  --terminal-key: #2563eb;
+  --terminal-value: #c2410c;
 }
 
 @theme inline {
@@ -22,6 +54,14 @@
   --color-card-hover: var(--card-hover);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-text: var(--surface-text);
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-header: var(--terminal-header);
+  --color-accent-text: var(--accent-text);
+  --color-terminal-key: var(--terminal-key);
+  --color-terminal-value: var(--terminal-value);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -41,16 +81,12 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background: var(--accent-glow);
-  color: white;
-}
-
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 .hero-glow {

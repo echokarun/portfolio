@@ -68,7 +68,7 @@ export default function Experience() {
               <motion.span
                 key={tag}
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(108,92,231,0.15)" }}
-                className="px-3 py-1 text-xs font-medium rounded-full bg-zinc-800 text-zinc-400 transition-colors cursor-default"
+                className="px-3 py-1 text-xs font-medium rounded-full bg-surface text-surface-text transition-colors cursor-default"
               >
                 {tag}
               </motion.span>

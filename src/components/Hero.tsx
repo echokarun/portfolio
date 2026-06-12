@@ -241,9 +241,9 @@ export default function Hero() {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-accent/10 blur-3xl rounded-3xl" />
-                <div className="relative bg-[#0a0a0f] border border-border rounded-2xl overflow-hidden shadow-2xl shadow-accent/5">
+                <div className="relative bg-terminal-bg border border-border rounded-2xl overflow-hidden shadow-2xl shadow-accent/5">
                   {/* Terminal header */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-[#0d0d12]">
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-terminal-header">
                     <div className="flex gap-1.5">
                       <span className="size-3 rounded-full bg-red-500/80" />
                       <span className="size-3 rounded-full bg-yellow-500/80" />
@@ -278,9 +278,9 @@ export default function Hero() {
                         transition={{ delay: 1.4 + i * 0.15, duration: 0.4 }}
                         className="pl-6 flex gap-1 flex-wrap"
                       >
-                        <span className="text-blue-300">{key}</span>
+                        <span className="text-terminal-key">{key}</span>
                         <span className="text-muted">:</span>
-                        <span className="text-orange-300">{val}</span>
+                        <span className="text-terminal-value">{val}</span>
                         <span className="text-muted">,</span>
                       </motion.div>
                     ))}

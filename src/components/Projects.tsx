@@ -126,7 +126,7 @@ export default function Projects() {
                 {project.stack.split(" · ").map((tech) => (
                   <span
                     key={tech}
-                    className="text-[11px] font-mono text-zinc-600 px-2 py-0.5 rounded-md bg-zinc-900/50"
+                    className="text-[11px] font-mono text-muted px-2 py-0.5 rounded-md bg-surface"
                   >
                     {tech}
                   </span>

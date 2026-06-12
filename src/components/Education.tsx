@@ -51,7 +51,7 @@ export default function Education() {
                 className={`shrink-0 px-4 py-1.5 text-xs font-medium rounded-full border ${
                   edu.current
                     ? "bg-accent/10 text-accent border-accent/20"
-                    : "bg-zinc-800/50 text-muted border-border"
+                    : "bg-surface text-muted border-border"
                 }`}
               >
                 {edu.current ? `${edu.period} · ${edu.status}` : edu.period}
