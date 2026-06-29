@@ -12,9 +12,21 @@ const stagger = {
   }),
 };
 
+const quickFacts = [
+  { label: "Location", value: "Kathmandu, Nepal" },
+  { label: "Status", value: "Available", accent: true },
+  { label: "Focus", value: "Frontend & DevOps" },
+  { label: "Education", value: "BCA (4th Semester)" },
+  {
+    label: "GitHub",
+    value: "@echokarun",
+    link: "https://github.com/echokarun",
+  },
+];
+
 export default function Summary() {
   return (
-    <section id="about" className="px-6 md:px-12 lg:pl-32 xl:pl-44 py-20 md:py-28">
+    <section id="about" className="px-6 md:px-12 lg:pl-36 xl:pl-48 py-20 md:py-28">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           number="01"
@@ -22,7 +34,7 @@ export default function Summary() {
           subtitle="I believe in a user-centered design approach, ensuring that every project I work on is tailored to meet the specific needs of its users."
         />
 
-        <div className="grid lg:grid-cols-[1fr_320px] gap-12">
+        <div className="grid lg:grid-cols-[1fr_300px] gap-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -45,22 +57,34 @@ export default function Summary() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-card border border-border rounded-3xl p-6 h-fit"
+            className="glass rounded-2xl p-6 h-fit"
           >
-            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-5">
+            <h3 className="text-xs font-semibold text-muted uppercase tracking-widest mb-5">
               Quick Facts
             </h3>
-            <div className="space-y-4">
-              {[
-                { label: "Location", value: "Kathmandu, Nepal" },
-                { label: "Date of Birth", value: "2006-01-17" },
-                { label: "Status", value: "Available", accent: true },
-                { label: "Focus", value: "Frontend & DevOps" },
-                { label: "Education", value: "BCA (4th Semester)" },
-              ].map((item) => (
-                <div key={item.label} className="flex justify-between items-center text-sm">
+            <div className="space-y-0">
+              {quickFacts.map((item, i) => (
+                <div
+                  key={item.label}
+                  className={`flex justify-between items-center text-sm py-3 ${
+                    i < quickFacts.length - 1 ? "border-b border-white/[0.04]" : ""
+                  }`}
+                >
                   <span className="text-muted">{item.label}</span>
-                  <span className={item.accent ? "text-accent font-medium" : ""}>{item.value}</span>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline font-medium transition-colors"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <span className={item.accent ? "text-accent font-medium" : "text-foreground"}>
+                      {item.value}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const roles = ["Frontend Engineer", "DevOps Engineer", "React Developer", "Mobile Developer"];
@@ -77,7 +77,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
   }, [target]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} aria-live="polite" aria-atomic="true">
       {count}
       {suffix}
     </span>
@@ -85,40 +85,55 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 }
 
 export default function Hero() {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const springX = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+  const pctX = useTransform(springX, (v) => `${v * 100}%`);
+  const pctY = useTransform(springY, (v) => `${v * 100}%`);
+  const glowBg = useMotionTemplate`radial-gradient(700px circle at ${pctX} ${pctY}, var(--accent-glow), transparent 60%)`;
 
   useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(hover: none)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
     const handleMouse = (e: MouseEvent) => {
       mouseX.set(e.clientX / window.innerWidth);
       mouseY.set(e.clientY / window.innerHeight);
     };
     window.addEventListener("mousemove", handleMouse);
     return () => window.removeEventListener("mousemove", handleMouse);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isTouchDevice]);
+
+  const stats = [
+    { target: 7, suffix: "+", label: "Completed Projects", featured: true },
+    { target: 1, suffix: "+", label: "Years of Experience", featured: false },
+    { target: 14, suffix: " mos", label: "Professional Work", featured: false },
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Mouse-follow glow */}
-      <motion.div
-        className="hero-glow absolute inset-0 opacity-30"
-        style={{
-          background: `radial-gradient(700px circle at ${springX.get() * 100}% ${springY.get() * 100}%, var(--accent-glow), transparent 60%)`,
-        }}
-      />
+      {isTouchDevice ? (
+        <div
+          className="hero-glow absolute inset-0 opacity-30 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(700px circle at 50% 40%, var(--accent-glow), transparent 60%)",
+          }}
+        />
+      ) : (
+        <motion.div
+          className="hero-glow absolute inset-0 opacity-30 pointer-events-none"
+          style={{ background: glowBg }}
+        />
+      )}
 
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      <div className="relative w-full px-6 md:px-12 lg:pl-32 xl:pl-44 py-24 md:py-32">
+      <div className="relative w-full px-6 md:px-12 lg:pl-36 xl:pl-48 py-24 md:py-32">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-20">
             {/* Text content */}
@@ -127,7 +142,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5 text-accent text-sm mb-8"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/[0.06] text-accent text-sm mb-8"
               >
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
@@ -178,13 +193,16 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.5 }}
-                className="flex flex-wrap gap-4 mb-16"
+                className="flex flex-wrap items-center gap-5 mb-16"
               >
                 <motion.a
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{
+                    scale: 1.03,
+                    boxShadow: "0 0 30px rgba(124,58,237,0.45)",
+                  }}
                   whileTap={{ scale: 0.97 }}
                   href="mailto:rayamajhikarun@gmail.com"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent text-white font-medium text-sm hover:bg-accent/90 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent text-white font-medium text-sm transition-all"
                 >
                   Let's Talk
                   <svg className="size-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
@@ -192,12 +210,13 @@ export default function Hero() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                   </svg>
                 </motion.a>
+
                 <motion.a
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ x: 2, color: "var(--accent)" }}
                   whileTap={{ scale: 0.97 }}
                   href="/resume.pdf"
                   download
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-border hover:border-accent/50 text-sm font-medium transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors"
                 >
                   <svg className="size-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                     <title>Download icon</title>
@@ -211,15 +230,17 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1.8 }}
-                className="flex flex-wrap gap-8 sm:gap-16"
+                className="flex flex-wrap gap-8 sm:gap-12"
               >
-                {[
-                  { target: 1, suffix: "+", label: "Years of Experience" },
-                  { target: 7, suffix: "+", label: "Completed Projects" },
-                  { target: 14, suffix: " mos", label: "Professional Work" },
-                ].map((stat) => (
+                {stats.map((stat) => (
                   <div key={stat.label}>
-                    <div className="text-3xl sm:text-4xl font-bold text-foreground tabular-nums">
+                    <div
+                      className={`font-bold text-foreground tabular-nums ${
+                        stat.featured
+                          ? "text-4xl sm:text-5xl"
+                          : "text-3xl sm:text-4xl"
+                      }`}
+                    >
                       <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                     </div>
                     <div className="text-xs text-muted mt-1 uppercase tracking-wider">{stat.label}</div>
@@ -241,9 +262,21 @@ export default function Hero() {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-accent/10 blur-3xl rounded-3xl" />
-                <div className="relative bg-terminal-bg border border-border rounded-2xl overflow-hidden shadow-2xl shadow-accent/5">
+                <div
+                  className="relative border border-border rounded-xl overflow-hidden shadow-2xl shadow-accent/10"
+                  style={{
+                    backdropFilter: "blur(24px)",
+                    WebkitBackdropFilter: "blur(24px)",
+                    background: "var(--terminal-bg)",
+                    boxShadow:
+                      "0 25px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                >
                   {/* Terminal header */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-terminal-header">
+                  <div
+                    className="flex items-center gap-2 px-4 py-3 border-b border-border/50"
+                    style={{ background: "var(--terminal-header)" }}
+                  >
                     <div className="flex gap-1.5">
                       <span className="size-3 rounded-full bg-red-500/80" />
                       <span className="size-3 rounded-full bg-yellow-500/80" />
@@ -263,7 +296,7 @@ export default function Hero() {
                       transition={{ delay: 1.2, duration: 0.5 }}
                       className="pl-6"
                     >
-                      <span className="text-accent">{'{'}</span>
+                      <span className="text-accent">{"{"}</span>
                     </motion.div>
                     {[
                       ['"frontend"', '"React · Next.js · TypeScript"'],
@@ -290,7 +323,7 @@ export default function Hero() {
                       transition={{ delay: 2.2, duration: 0.4 }}
                       className="pl-6"
                     >
-                      <span className="text-accent">{'}'}</span>
+                      <span className="text-accent">{"}"}</span>
                     </motion.div>
                     <motion.div
                       initial={{ opacity: 0 }}

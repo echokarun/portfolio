@@ -20,7 +20,7 @@ const tags = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 md:px-12 lg:pl-32 xl:pl-44 py-20 md:py-28">
+    <section id="experience" className="px-6 md:px-12 lg:pl-36 xl:pl-48 py-20 md:py-28">
       <div className="max-w-5xl mx-auto">
         <SectionHeader number="02" title="Experience" />
 
@@ -29,7 +29,7 @@ export default function Experience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="bg-card border border-border rounded-3xl p-6 md:p-8"
+          className="glass rounded-2xl p-6 md:p-8"
         >
           <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
             <div>
@@ -42,7 +42,7 @@ export default function Experience() {
                 <span className="text-muted">Satdobato, Lalitpur</span>
               </div>
             </div>
-            <span className="shrink-0 px-4 py-1.5 text-xs font-medium rounded-full bg-accent/10 text-accent border border-accent/20">
+            <span className="shrink-0 px-4 py-1.5 text-xs font-mono font-medium rounded-full bg-accent/[0.08] text-accent border border-accent/20">
               Feb 2024 – Apr 2025
             </span>
           </div>
@@ -63,12 +63,12 @@ export default function Experience() {
             ))}
           </ul>
 
-          <div className="flex flex-wrap gap-2 mt-6">
+          <div className="flex flex-wrap gap-2 mt-6 pt-5 border-t border-white/[0.04]">
             {tags.map((tag) => (
               <motion.span
                 key={tag}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(108,92,231,0.15)" }}
-                className="px-3 py-1 text-xs font-medium rounded-full bg-surface text-surface-text transition-colors cursor-default"
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(124,58,237,0.15)", color: "#a78bfa" }}
+                className="px-3 py-1 text-xs font-medium rounded-lg backdrop-blur-sm bg-white/[0.05] border border-white/[0.08] text-muted transition-colors cursor-default"
               >
                 {tag}
               </motion.span>

@@ -22,7 +22,12 @@ export default function SectionHeader({
       <div className="flex items-center gap-3 mb-3">
         <span className="text-accent text-xs font-mono tracking-widest">{number}</span>
         <h2 className="text-2xl md:text-4xl font-bold tracking-tight">{title}</h2>
-        <div className="h-px flex-1 bg-border ml-4" />
+        <div
+          className="h-px flex-1 ml-4"
+          style={{
+            background: "linear-gradient(90deg, rgba(124,58,237,0.4), rgba(6,182,212,0.2), transparent)",
+          }}
+        />
       </div>
       {subtitle && (
         <p className="text-muted text-sm md:text-base max-w-xl">{subtitle}</p>
